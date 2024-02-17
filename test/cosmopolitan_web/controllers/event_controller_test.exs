@@ -7,17 +7,17 @@ defmodule CosmopolitanWeb.EventControllerTest do
 
   @create_attrs %{
     description: "some description",
-    end_datetime: ~U[2024-02-16 12:05:00Z],
+    end_datetime: ~U[2224-02-16 12:05:00Z],
     location: "some location",
-    start_datetime: ~U[2024-02-16 12:05:00Z],
+    start_datetime: ~U[2224-02-16 12:05:00Z],
     title: "some title"
   }
   @update_attrs %{
     description: "some updated description",
-    end_datetime: ~U[2024-02-17 12:05:00Z],
+    end_datetime: ~U[2224-02-17 12:05:00Z],
     location: "some updated location",
     slug: "some-updated-slug",
-    start_datetime: ~U[2024-02-17 12:05:00Z],
+    start_datetime: ~U[2224-02-17 12:05:00Z],
     title: "some updated title"
   }
   @invalid_attrs %{description: nil, end_datetime: nil, location: nil, slug: nil, start_datetime: nil, title: nil}
@@ -43,10 +43,10 @@ defmodule CosmopolitanWeb.EventControllerTest do
       assert %{
                "id" => ^id,
                "description" => "some description",
-               "end_datetime" => "2024-02-16T12:05:00Z",
+               "end_datetime" => "2224-02-16T12:05:00Z",
                "location" => "some location",
                "slug" => "some-title",
-               "start_datetime" => "2024-02-16T12:05:00Z",
+               "start_datetime" => "2224-02-16T12:05:00Z",
                "title" => "some title"
              } = json_response(conn, 200)["data"]
     end
@@ -69,10 +69,10 @@ defmodule CosmopolitanWeb.EventControllerTest do
       assert %{
                "id" => ^id,
                "description" => "some updated description",
-               "end_datetime" => "2024-02-17T12:05:00Z",
+               "end_datetime" => "2224-02-17T12:05:00Z",
                "location" => "some updated location",
                "slug" => "some-updated-slug",
-               "start_datetime" => "2024-02-17T12:05:00Z",
+               "start_datetime" => "2224-02-17T12:05:00Z",
                "title" => "some updated title"
              } = json_response(conn, 200)["data"]
     end

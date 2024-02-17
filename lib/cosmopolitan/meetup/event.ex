@@ -20,6 +20,8 @@ defmodule Cosmopolitan.Meetup.Event do
     |> build_slug()
     |> validate_required([:slug, :title, :start_datetime, :end_datetime, :location, :description])
     |> validate_format(:slug, ~r/([a-z0-9]|-)/)
+    |> validate_change(:start_datetime, &validate_date_in_future/2)
+    |> validate_change(:end_datetime, &validate_date_in_future/2)
     |> unique_constraint(:slug)
   end
 
@@ -33,5 +35,14 @@ defmodule Cosmopolitan.Meetup.Event do
 
   defp build_slug(changeset) do
     changeset
+  end
+
+  defp validate_date_in_future(key, value) do
+    now = DateTime.utc_now()
+    if DateTime.diff(value, now) < 0 do
+      [{key, "cannot be in the past"}]
+    else
+      []
+    end
   end
 end

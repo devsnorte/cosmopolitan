@@ -17,10 +17,10 @@ defmodule Cosmopolitan.MeetupFixtures do
       attrs
       |> Enum.into(%{
         description: "some description",
-        end_datetime: ~U[2024-02-16 12:05:00Z],
+        end_datetime: ~U[2224-02-16 12:05:00Z],
         location: "some location",
         slug: unique_event_slug(),
-        start_datetime: ~U[2024-02-16 12:05:00Z],
+        start_datetime: ~U[2224-02-16 12:05:00Z],
         title: "some title"
       })
       |> Cosmopolitan.Meetup.create_event()
