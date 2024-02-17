@@ -19,6 +19,7 @@ defmodule Cosmopolitan.Meetup.Event do
     |> cast(attrs, [:slug, :title, :start_datetime, :end_datetime, :location, :description])
     |> build_slug()
     |> validate_required([:slug, :title, :start_datetime, :end_datetime, :location, :description])
+    |> validate_format(:slug, ~r/([a-z]-)/)
     |> unique_constraint(:slug)
   end
 

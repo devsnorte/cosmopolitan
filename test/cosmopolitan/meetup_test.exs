@@ -21,13 +21,13 @@ defmodule Cosmopolitan.MeetupTest do
     end
 
     test "create_event/1 with valid data creates a event" do
-      valid_attrs = %{description: "some description", end_datetime: ~U[2024-02-16 12:05:00Z], location: "some location", slug: "some slug", start_datetime: ~U[2024-02-16 12:05:00Z], title: "some title"}
+      valid_attrs = %{description: "some description", end_datetime: ~U[2024-02-16 12:05:00Z], location: "some location", slug: "some-slug", start_datetime: ~U[2024-02-16 12:05:00Z], title: "some title"}
 
       assert {:ok, %Event{} = event} = Meetup.create_event(valid_attrs)
       assert event.description == "some description"
       assert event.end_datetime == ~U[2024-02-16 12:05:00Z]
       assert event.location == "some location"
-      assert event.slug == "some slug"
+      assert event.slug == "some-slug"
       assert event.start_datetime == ~U[2024-02-16 12:05:00Z]
       assert event.title == "some title"
     end
@@ -50,13 +50,13 @@ defmodule Cosmopolitan.MeetupTest do
 
     test "update_event/2 with valid data updates the event" do
       event = event_fixture()
-      update_attrs = %{description: "some updated description", end_datetime: ~U[2024-02-17 12:05:00Z], location: "some updated location", slug: "some updated slug", start_datetime: ~U[2024-02-17 12:05:00Z], title: "some updated title"}
+      update_attrs = %{description: "some updated description", end_datetime: ~U[2024-02-17 12:05:00Z], location: "some updated location", slug: "some-updated-slug", start_datetime: ~U[2024-02-17 12:05:00Z], title: "some updated title"}
 
       assert {:ok, %Event{} = event} = Meetup.update_event(event, update_attrs)
       assert event.description == "some updated description"
       assert event.end_datetime == ~U[2024-02-17 12:05:00Z]
       assert event.location == "some updated location"
-      assert event.slug == "some updated slug"
+      assert event.slug == "some-updated-slug"
       assert event.start_datetime == ~U[2024-02-17 12:05:00Z]
       assert event.title == "some updated title"
     end

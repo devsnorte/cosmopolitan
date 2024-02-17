@@ -7,7 +7,7 @@ defmodule Cosmopolitan.MeetupFixtures do
   @doc """
   Generate a unique event slug.
   """
-  def unique_event_slug, do: "some slug#{System.unique_integer([:positive])}"
+  def unique_event_slug, do: "some-slug#{System.unique_integer([:positive])}"
 
   @doc """
   Generate a event.
