@@ -24,7 +24,7 @@ defmodule Cosmopolitan.Meetup.Event do
   end
 
   defp build_slug(%{changes: %{title: title}} = changeset) when is_binary(title) do
-    if get_change(changeset, :slug) do
+    if get_change(changeset, :slug) || changeset.data.slug != nil do
       changeset
     else
       put_change(changeset, :slug, Slug.slugify(title))
