@@ -21,14 +21,14 @@ defmodule Cosmopolitan.MeetupTest do
     end
 
     test "create_event/1 with valid data creates a event" do
-      valid_attrs = %{description: "some description", end_datetime: ~U[2224-02-16 12:05:00Z], location: "some location", slug: "some-slug", start_datetime: ~U[2224-02-18 12:05:00Z], title: "some title"}
+      valid_attrs = %{description: "some description", end_datetime: ~U[2224-02-16 12:05:00Z], location: "some location", slug: "some-slug", start_datetime: ~U[2224-02-16 10:05:00Z], title: "some title"}
 
       assert {:ok, %Event{} = event} = Meetup.create_event(valid_attrs)
       assert event.description == "some description"
       assert event.end_datetime == ~U[2224-02-16 12:05:00Z]
       assert event.location == "some location"
       assert event.slug == "some-slug"
-      assert event.start_datetime == ~U[2224-02-18 12:05:00Z]
+      assert event.start_datetime == ~U[2224-02-16 10:05:00Z]
       assert event.title == "some title"
     end
 
@@ -38,6 +38,13 @@ defmodule Cosmopolitan.MeetupTest do
       assert {:error, %Ecto.Changeset{} = changeset} = Meetup.create_event(invalid_attrs)
       assert Keyword.get(changeset.errors, :start_datetime) == {"cannot be in the past", []}
       assert Keyword.get(changeset.errors, :end_datetime) == {"cannot be in the past", []}
+    end
+
+    test "create_event/1 end_datetime cannot be before start_datetime" do
+      invalid_attrs = %{description: "some description", end_datetime: ~U[2224-02-16 08:05:00Z], location: "some location", slug: "some-slug", start_datetime: ~U[2224-02-16 10:05:00Z], title: "some title"}
+
+      assert {:error, %Ecto.Changeset{} = changeset} = Meetup.create_event(invalid_attrs)
+      assert Keyword.get(changeset.errors, :end_datetime) == {"cannot be before start_datetime", []}
     end
 
     test "create_event/1 without a slug generates a slug" do

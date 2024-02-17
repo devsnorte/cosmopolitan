@@ -22,6 +22,7 @@ defmodule Cosmopolitan.Meetup.Event do
     |> validate_format(:slug, ~r/([a-z0-9]|-)/)
     |> validate_change(:start_datetime, &validate_date_in_future/2)
     |> validate_change(:end_datetime, &validate_date_in_future/2)
+    |> validate_end_datetime_larger_than_start()
     |> unique_constraint(:slug)
   end
 
@@ -43,6 +44,17 @@ defmodule Cosmopolitan.Meetup.Event do
       [{key, "cannot be in the past"}]
     else
       []
+    end
+  end
+
+  defp validate_end_datetime_larger_than_start(changeset) do
+    start_date = get_change(changeset, :start_datetime)
+    end_date = get_change(changeset, :end_datetime)
+
+    if start_date != nil && end_date != nil && DateTime.diff(end_date, start_date) < 0 do
+      add_error(changeset, :end_datetime, "cannot be before start_datetime")
+    else
+      changeset
     end
   end
 end
