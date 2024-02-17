@@ -16,6 +16,8 @@ Já se inscreva no [Canal Youtube Devs Norte](https://www.youtube.com/@DevsNorte
 
 # Para contribuir e fazer parte do projeto
 
+Fale com a gente no WhatsApp/telegram/Discord!
+
 # Contribuidores
 
 <table>
