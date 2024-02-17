@@ -70,6 +70,14 @@ defmodule Cosmopolitan.MeetupTest do
       assert event.slug == old_event.slug
     end
 
+    test "update_event/2 slugs can be just one word" do
+      old_event = event_fixture()
+      update_attrs = %{slug: "event1"}
+
+      assert {:ok, %Event{} = event} = Meetup.update_event(old_event, update_attrs)
+      assert event.slug == "event1"
+    end
+
     test "update_event/2 with invalid data returns error changeset" do
       event = event_fixture()
       assert {:error, %Ecto.Changeset{}} = Meetup.update_event(event, @invalid_attrs)
