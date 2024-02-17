@@ -32,6 +32,18 @@ defmodule Cosmopolitan.MeetupTest do
       assert event.title == "some title"
     end
 
+    test "create_event/1 without a slug generates a slug" do
+      valid_attrs = %{description: "some description", end_datetime: ~U[2024-02-16 12:05:00Z], location: "some location", start_datetime: ~U[2024-02-16 12:05:00Z], title: "some title"}
+
+      assert {:ok, %Event{} = event} = Meetup.create_event(valid_attrs)
+      assert event.description == "some description"
+      assert event.end_datetime == ~U[2024-02-16 12:05:00Z]
+      assert event.location == "some location"
+      assert event.slug == "some-title"
+      assert event.start_datetime == ~U[2024-02-16 12:05:00Z]
+      assert event.title == "some title"
+    end
+
     test "create_event/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = Meetup.create_event(@invalid_attrs)
     end
