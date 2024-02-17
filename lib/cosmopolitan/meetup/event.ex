@@ -17,7 +17,20 @@ defmodule Cosmopolitan.Meetup.Event do
   def changeset(event, attrs) do
     event
     |> cast(attrs, [:slug, :title, :start_datetime, :end_datetime, :location, :description])
+    |> build_slug()
     |> validate_required([:slug, :title, :start_datetime, :end_datetime, :location, :description])
     |> unique_constraint(:slug)
+  end
+
+  defp build_slug(%{changes: %{title: title}} = changeset) when is_binary(title) do
+    if get_change(changeset, :slug) do
+      changeset
+    else
+      put_change(changeset, :slug, Slug.slugify(title))
+    end
+  end
+
+  defp build_slug(changeset) do
+    changeset
   end
 end

@@ -44,6 +44,7 @@ defmodule Cosmopolitan.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
+      {:slugify, "~> 1.3"},
       {:plug_cowboy, "~> 2.7"}
     ]
   end

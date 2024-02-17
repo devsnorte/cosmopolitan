@@ -9,7 +9,6 @@ defmodule CosmopolitanWeb.EventControllerTest do
     description: "some description",
     end_datetime: ~U[2024-02-16 12:05:00Z],
     location: "some location",
-    slug: "some slug",
     start_datetime: ~U[2024-02-16 12:05:00Z],
     title: "some title"
   }
@@ -46,7 +45,7 @@ defmodule CosmopolitanWeb.EventControllerTest do
                "description" => "some description",
                "end_datetime" => "2024-02-16T12:05:00Z",
                "location" => "some location",
-               "slug" => "some slug",
+               "slug" => "some-title",
                "start_datetime" => "2024-02-16T12:05:00Z",
                "title" => "some title"
              } = json_response(conn, 200)["data"]
