@@ -23,7 +23,12 @@ defmodule CosmopolitanWeb.EventJSON do
       start_datetime: event.start_datetime,
       end_datetime: event.end_datetime,
       location: event.location,
-      description: event.description
+      description: event.description,
+      visibility: event.visibility
     }
+  end
+
+  def sucessful_creation(_) do
+    %{}
   end
 end

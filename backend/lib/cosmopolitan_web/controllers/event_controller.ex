@@ -25,6 +25,14 @@ defmodule CosmopolitanWeb.EventController do
     render(conn, :show, event: event)
   end
 
+  def update(conn, %{"id" => id, "visibility" => visibility_param}) do
+    event = Meetup.get_event!(id)
+
+    with {:ok, _} <- Meetup.update_event(event, %{"visibility" => visibility_param}) do
+      render(conn, :sucessful_creation)
+    end
+  end
+
   def update(conn, %{"id" => id, "event" => event_params}) do
     event = Meetup.get_event!(id)
 
