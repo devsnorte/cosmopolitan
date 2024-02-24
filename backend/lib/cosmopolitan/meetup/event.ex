@@ -9,6 +9,7 @@ defmodule Cosmopolitan.Meetup.Event do
     field :slug, :string
     field :start_datetime, :utc_datetime
     field :title, :string
+    field :visibility, :boolean, default: false
 
     timestamps(type: :utc_datetime)
   end
@@ -16,7 +17,7 @@ defmodule Cosmopolitan.Meetup.Event do
   @doc false
   def changeset(event, attrs) do
     event
-    |> cast(attrs, [:slug, :title, :start_datetime, :end_datetime, :location, :description])
+    |> cast(attrs, [:slug, :title, :start_datetime, :end_datetime, :location, :description, :visibility])
     |> build_slug()
     |> validate_required([:slug, :title, :start_datetime, :end_datetime, :location, :description])
     |> validate_format(:slug, ~r/([a-z0-9]|-)/)

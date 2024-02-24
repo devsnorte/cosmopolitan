@@ -21,6 +21,8 @@ defmodule CosmopolitanWeb.EventControllerTest do
     title: "some updated title"
   }
   @invalid_attrs %{description: nil, end_datetime: nil, location: nil, slug: nil, start_datetime: nil, title: nil}
+  @update_visibility_attrs %{"visibility" => true}
+  @update_visibility_invalid_attrs %{"visibility" => "anything"}
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
@@ -47,7 +49,8 @@ defmodule CosmopolitanWeb.EventControllerTest do
                "location" => "some location",
                "slug" => "some-title",
                "start_datetime" => "2224-02-16T12:05:00Z",
-               "title" => "some title"
+               "title" => "some title",
+               "visibility" => false
              } = json_response(conn, 200)["data"]
     end
 
@@ -79,6 +82,16 @@ defmodule CosmopolitanWeb.EventControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn, event: event} do
       conn = put(conn, ~p"/api/events/#{event}", event: @invalid_attrs)
+      assert json_response(conn, 422)["errors"] != %{}
+    end
+
+    test "renders success when visibility is updated to true", %{conn: conn, event: event} do
+      conn = patch(conn, ~p"/api/events/#{event}", @update_visibility_attrs)
+      assert json_response(conn, 200) == %{}
+    end
+
+    test "renders error when visibility is not a boolean", %{conn: conn, event: event} do
+      conn = patch(conn, ~p"/api/events/#{event}", @update_visibility_invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
