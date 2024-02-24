@@ -49,6 +49,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "joaopedromoraez",
+      "name": "João Pedro Moraes",
+      "avatar_url": "https://avatars.githubusercontent.com/u/46731099?v=4",
+      "profile": "https://www.linkedin.com/in/joaopedromoraez",
+      "contributions": [
+        "design",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
