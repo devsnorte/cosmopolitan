@@ -1,0 +1,29 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "lubien",
+      "name": "Lubien",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9121359?v=4",
+      "profile": "https://www.linkedin.com/in/lubien/",
+      "contributions": [
+        "ideas",
+        "code",
+        "review",
+        "talk"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "cosmopolitan",
+  "projectOwner": "devsnorte"
+}
