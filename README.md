@@ -1,6 +1,6 @@
 <p align="center">
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
     <img src="resources/assets/public/cosmopolitan-logo-full.png" style="max-height: 300px; height: 100%;" >
 </p>
@@ -37,6 +37,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://iagocavalcante.com/"><img src="https://avatars.githubusercontent.com/u/5131187?v=4?s=100" width="100px;" alt="Iago Angelim Costa Cavalcante"/><br /><sub><b>Iago Angelim Costa Cavalcante</b></sub></a><br /><a href="#ideas-iagocavalcante" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/devsnorte/cosmopolitan/pulls?q=is%3Apr+reviewed-by%3Aiagocavalcante" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/devsnorte/cosmopolitan/commits?author=iagocavalcante" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://thayanacmamore.dev"><img src="https://avatars.githubusercontent.com/u/8525721?v=4?s=100" width="100px;" alt="Thayana Correa Mamore"/><br /><sub><b>Thayana Correa Mamore</b></sub></a><br /><a href="#ideas-thauska" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/devsnorte/cosmopolitan/commits?author=thauska" title="Documentation">📖</a> <a href="https://github.com/devsnorte/cosmopolitan/pulls?q=is%3Apr+reviewed-by%3Athauska" title="Reviewed Pull Requests">👀</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/juanrtalmeida"><img src="https://avatars.githubusercontent.com/u/75220133?v=4?s=100" width="100px;" alt="Juan Rodrigues Teixeira Almeida "/><br /><sub><b>Juan Rodrigues Teixeira Almeida </b></sub></a><br /><a href="https://github.com/devsnorte/cosmopolitan/commits?author=juanrtalmeida" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/joaopedromoraez"><img src="https://avatars.githubusercontent.com/u/46731099?v=4?s=100" width="100px;" alt="João Pedro Moraes"/><br /><sub><b>João Pedro Moraes</b></sub></a><br /><a href="#design-joaopedromoraez" title="Design">🎨</a> <a href="https://github.com/devsnorte/cosmopolitan/commits?author=joaopedromoraez" title="Documentation">📖</a></td>
     </tr>
   </tbody>
 </table>
