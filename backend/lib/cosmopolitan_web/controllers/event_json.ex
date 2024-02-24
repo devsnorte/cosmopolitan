@@ -27,8 +27,4 @@ defmodule CosmopolitanWeb.EventJSON do
       visibility: event.visibility
     }
   end
-
-  def sucessful_creation(_) do
-    %{}
-  end
 end
