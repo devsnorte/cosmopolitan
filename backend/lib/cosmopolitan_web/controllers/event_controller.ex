@@ -4,6 +4,8 @@ defmodule CosmopolitanWeb.EventController do
   alias Cosmopolitan.Meetup
   alias Cosmopolitan.Meetup.Event
 
+  plug CosmopolitanWeb.Plugs.RequireAuthPlug, [] when action in [:create, :update, :delete]
+
   action_fallback CosmopolitanWeb.FallbackController
 
   def index(conn, _params) do
