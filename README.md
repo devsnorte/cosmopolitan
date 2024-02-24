@@ -23,32 +23,6 @@ Já se inscreva no [Canal Youtube Devs Norte](https://www.youtube.com/@DevsNorte
 
 Fale com a gente no WhatsApp/telegram/Discord!
 
-# Contribuidores
-
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://www.linkedin.com/in/iago-a-cavalcante/">
-        <img src="https://avatars.githubusercontent.com/u/5131187?v=4" width="100px;" alt="Iago Cavalcante"/><br>
-        <sub>
-          <b>Iago Cavalcante</b>
-        </sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://www.linkedin.com/in/lubien/">
-        <img src="https://avatars.githubusercontent.com/lubien" width="100px;" alt="Lubien"/><br>
-        <sub>
-          <b>Lubien</b>
-        </sub>
-      </a>
-    </td>
-  </tr>
-</table>
-
-# Agradecimento
-
-Agradecemos a cada pessoa que tirou um tempinho para passar por lá, tirar dúvidas, trocar umas ideias e contribuiu de alguma forma.
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -70,3 +44,12 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+# Agradecimento
+
+Agradecemos a cada pessoa que tirou um tempinho para passar por lá, tirar dúvidas, trocar umas ideias e contribuiu de alguma forma.
+
+---
+<p align="center">
+Developed with ❤️ from community to community
+</p>
