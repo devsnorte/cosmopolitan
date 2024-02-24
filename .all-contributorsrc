@@ -59,6 +59,17 @@
         "design",
         "doc"
       ]
+    },
+    {
+      "login": "biancassilva",
+      "name": "Bianca",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7262942?v=4",
+      "profile": "https://github.com/biancassilva",
+      "contributions": [
+        "ideas",
+        "bug",
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 7,
