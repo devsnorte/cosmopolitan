@@ -1,4 +1,6 @@
-# Cosmopolitan
+<p align="center">
+    <img src="resources/assets/public/cosmopolitan-logo-full.png" style="max-height: 300px; height: 100%;" >
+</p>
 
 Aplicativo em desenvolvimento para gerenciamento de Meetups do Devs Norte. Estamos gravando o progresso sempre que possível e convidamos todo mundo interessado a participar.
 
