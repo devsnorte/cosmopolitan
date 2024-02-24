@@ -29,6 +29,17 @@
         "review",
         "code"
       ]
+    },
+    {
+      "login": "thauska",
+      "name": "Thayana Correa Mamore",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8525721?v=4",
+      "profile": "https://thayanacmamore.dev",
+      "contributions": [
+        "ideas",
+        "doc",
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 7,
