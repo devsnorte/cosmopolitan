@@ -2,7 +2,9 @@ defmodule CosmopolitanWeb.EventControllerTest do
   use CosmopolitanWeb.ConnCase
 
   import Cosmopolitan.MeetupFixtures
+  import Cosmopolitan.AccountsFixtures
 
+  alias Cosmopolitan.Accounts
   alias Cosmopolitan.Meetup.Event
 
   @create_attrs %{
@@ -36,6 +38,9 @@ defmodule CosmopolitanWeb.EventControllerTest do
 
   describe "create event" do
     test "renders event when data is valid", %{conn: conn} do
+      user = user_fixture()
+      token = Accounts.generate_token_for_user(user)
+      conn = Plug.Conn.put_req_header(conn, "authorization", token)
       conn = post(conn, ~p"/api/events", event: @create_attrs)
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
@@ -53,7 +58,21 @@ defmodule CosmopolitanWeb.EventControllerTest do
              } = json_response(conn, 200)["data"]
     end
 
+    test "send 403 when user is not logged in", %{conn: conn} do
+      conn = post(conn, ~p"/api/events", event: @create_attrs)
+      assert json_response(conn, 403)
+    end
+
+    test "send 403 when user token is invalid", %{conn: conn} do
+      conn = Plug.Conn.put_req_header(conn, "authorization", "seilamano")
+      conn = post(conn, ~p"/api/events", event: @create_attrs)
+      assert json_response(conn, 403)
+    end
+
     test "renders errors when data is invalid", %{conn: conn} do
+      user = user_fixture()
+      token = Accounts.generate_token_for_user(user)
+      conn = Plug.Conn.put_req_header(conn, "authorization", token)
       conn = post(conn, ~p"/api/events", event: @invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end

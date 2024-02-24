@@ -1,6 +1,7 @@
 defmodule CosmopolitanWeb.EventController do
   use CosmopolitanWeb, :controller
 
+  alias Cosmopolitan.Accounts
   alias Cosmopolitan.Meetup
   alias Cosmopolitan.Meetup.Event
 
@@ -12,11 +13,23 @@ defmodule CosmopolitanWeb.EventController do
   end
 
   def create(conn, %{"event" => event_params}) do
-    with {:ok, %Event{} = event} <- Meetup.create_event(event_params) do
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", ~p"/api/events/#{event}")
-      |> render(:show, event: event)
+    case Plug.Conn.get_req_header(conn, "authorization") do
+      [token] ->
+        case Accounts.verify_user_token(token) do
+          {:ok, _user_id} ->
+            with {:ok, %Event{} = event} <- Meetup.create_event(event_params) do
+              conn
+              |> put_status(:created)
+              |> put_resp_header("location", ~p"/api/events/#{event}")
+              |> render(:show, event: event)
+            end
+
+          _ ->
+            {:error, :forbidden}
+        end
+
+      _ ->
+        {:error, :forbidden}
     end
   end
 

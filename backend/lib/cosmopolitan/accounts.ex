@@ -101,4 +101,12 @@ defmodule Cosmopolitan.Accounts do
   def change_user(%User{} = user, attrs \\ %{}) do
     User.changeset(user, attrs)
   end
+
+  def generate_token_for_user(%User{id: id}) do
+    Phoenix.Token.sign(CosmopolitanWeb.Endpoint, "user auth", id)
+  end
+
+  def verify_user_token(token) do
+    Phoenix.Token.verify(CosmopolitanWeb.Endpoint, "user auth", token)
+  end
 end

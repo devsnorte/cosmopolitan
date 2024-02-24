@@ -21,4 +21,11 @@ defmodule CosmopolitanWeb.FallbackController do
     |> put_view(html: CosmopolitanWeb.ErrorHTML, json: CosmopolitanWeb.ErrorJSON)
     |> render(:"404")
   end
+
+  def call(conn, {:error, :forbidden}) do
+    conn
+    |> put_status(:forbidden)
+    |> put_view(html: CosmopolitanWeb.ErrorHTML, json: CosmopolitanWeb.ErrorJSON)
+    |> render(:"403")
+  end
 end
