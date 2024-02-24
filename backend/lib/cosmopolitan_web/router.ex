@@ -9,6 +9,7 @@ defmodule CosmopolitanWeb.Router do
     pipe_through :api
 
     resources "/events", EventController, except: [:new, :edit]
+    resources "/users", UserController, except: [:new, :edit]
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
