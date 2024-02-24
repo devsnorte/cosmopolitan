@@ -51,7 +51,9 @@ defmodule CosmopolitanWeb.EventController do
   def update(conn, %{"id" => id, "event" => event_params}) do
     event = Meetup.get_event!(id)
 
-    with {:ok, %Event{} = event} <- Meetup.update_event(event, event_params) do
+    with {:ok, token} <- fetch_authorization_from_conn(conn),
+      :ok <- verify_authetication(token),
+      {:ok, %Event{} = event} <- Meetup.update_event(event, event_params) do
       render(conn, :show, event: event)
     end
   end
@@ -59,7 +61,9 @@ defmodule CosmopolitanWeb.EventController do
   def delete(conn, %{"id" => id}) do
     event = Meetup.get_event!(id)
 
-    with {:ok, %Event{}} <- Meetup.delete_event(event) do
+    with {:ok, token} <- fetch_authorization_from_conn(conn),
+      :ok <- verify_authetication(token),
+      {:ok, %Event{}} <- Meetup.delete_event(event) do
       send_resp(conn, :no_content, "")
     end
   end

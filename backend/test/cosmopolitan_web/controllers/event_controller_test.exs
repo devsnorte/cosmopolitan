@@ -82,6 +82,9 @@ defmodule CosmopolitanWeb.EventControllerTest do
     setup [:create_event]
 
     test "renders event when data is valid", %{conn: conn, event: %Event{id: id} = event} do
+      user = user_fixture()
+      token = Accounts.generate_token_for_user(user)
+      conn = Plug.Conn.put_req_header(conn, "authorization", token)
       conn = put(conn, ~p"/api/events/#{event}", event: @update_attrs)
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
@@ -99,7 +102,15 @@ defmodule CosmopolitanWeb.EventControllerTest do
              } = json_response(conn, 200)["data"]
     end
 
+    test "renders 403 when is not logged in", %{conn: conn, event: %Event{id: _id} = event} do
+      conn = put(conn, ~p"/api/events/#{event}", event: @update_attrs)
+      assert json_response(conn, 403)
+    end
+
     test "renders errors when data is invalid", %{conn: conn, event: event} do
+      user = user_fixture()
+      token = Accounts.generate_token_for_user(user)
+      conn = Plug.Conn.put_req_header(conn, "authorization", token)
       conn = put(conn, ~p"/api/events/#{event}", event: @invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
@@ -109,12 +120,20 @@ defmodule CosmopolitanWeb.EventControllerTest do
     setup [:create_event]
 
     test "deletes chosen event", %{conn: conn, event: event} do
+      user = user_fixture()
+      token = Accounts.generate_token_for_user(user)
+      conn = Plug.Conn.put_req_header(conn, "authorization", token)
       conn = delete(conn, ~p"/api/events/#{event}")
       assert response(conn, 204)
 
       assert_error_sent 404, fn ->
         get(conn, ~p"/api/events/#{event}")
       end
+    end
+
+    test "get an 403 when trying to delete an event without being logged in", %{conn: conn, event: event} do
+      conn = delete(conn, ~p"/api/events/#{event}")
+      assert json_response(conn, 403)
     end
   end
 
