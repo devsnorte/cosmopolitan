@@ -18,6 +18,17 @@
         "review",
         "talk"
       ]
+    },
+    {
+      "login": "iagocavalcante",
+      "name": "Iago Angelim Costa Cavalcante",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5131187?v=4",
+      "profile": "https://iagocavalcante.com/",
+      "contributions": [
+        "ideas",
+        "review",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
