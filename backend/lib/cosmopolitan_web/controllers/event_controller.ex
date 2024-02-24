@@ -13,20 +13,30 @@ defmodule CosmopolitanWeb.EventController do
   end
 
   def create(conn, %{"event" => event_params}) do
+    with {:ok, token} <- fetch_authorization_from_conn(conn),
+      :ok <- verify_authetication(token),
+      {:ok, %Event{} = event} <- Meetup.create_event(event_params) do
+      conn
+      |> put_status(:created)
+      |> put_resp_header("location", ~p"/api/events/#{event}")
+      |> render(:show, event: event)
+    end
+  end
+
+  defp verify_authetication(token) do
+    case Accounts.verify_user_token(token) do
+      {:ok, _user_id} ->
+        :ok
+
+      _ ->
+        {:error, :forbidden}
+    end
+  end
+
+  defp fetch_authorization_from_conn(conn) do
     case Plug.Conn.get_req_header(conn, "authorization") do
       [token] ->
-        case Accounts.verify_user_token(token) do
-          {:ok, _user_id} ->
-            with {:ok, %Event{} = event} <- Meetup.create_event(event_params) do
-              conn
-              |> put_status(:created)
-              |> put_resp_header("location", ~p"/api/events/#{event}")
-              |> render(:show, event: event)
-            end
-
-          _ ->
-            {:error, :forbidden}
-        end
+        {:ok, token}
 
       _ ->
         {:error, :forbidden}
