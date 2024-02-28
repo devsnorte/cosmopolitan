@@ -8,6 +8,10 @@
 
 Aplicativo em desenvolvimento para gerenciamento de Meetups do Devs Norte. Estamos gravando o progresso sempre que possível e convidamos todo mundo interessado a participar.
 
+# Figma
+
+[Layout Sugerido](https://www.figma.com/file/Pcvx856CnUGfqNAEcHBqtv/Book-Event-Web%2FMobile-(Community)?type=design&node-id=0%3A1&mode=dev&t=7CiO1lb8SgP3zO8m-1)
+
 # YouTube
 
 A playlist será disponível em breve nessa seção.
