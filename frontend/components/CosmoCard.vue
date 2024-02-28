@@ -1,8 +1,9 @@
 <template>
   <div :class="cardClasses" @mouseover="showPopover = true" @mouseleave="showPopover = false">
-    <div class="card-content">
-      <h2>{{ title }}</h2>
-      <p>{{ description }}</p>
+    <div class="mb-4">
+      <h2 class="font-normal text-xl">{{ title }}</h2>
+      <p class="font-thin text-lg">{{ description }}</p>
+      <small class="text-xs">{{ date }}</small>
     </div>
     <div v-if="showPopover" class="popover">
       <slot name="popover"></slot>
@@ -32,6 +33,10 @@ export default {
     description: {
       type: String,
       required: true
+    },
+    date: {
+      type: String,
+      required: true
     }
   },
   setup(props) {
@@ -39,7 +44,13 @@ export default {
 
     const cardClasses = computed(() => {
       return [
-        'bg-white',
+        'bg-green-500',
+        'text-black',
+        'w-80',
+        'font-thin',
+        'text-line-clamp-3',
+        'text-pretty',
+        'hover:cursor-pointer',
         'rounded-md',
         'p-4',
         'shadow-md',
@@ -59,10 +70,6 @@ export default {
 </script>
 
 <style scoped>
-.card-content {
-  margin-bottom: 8px;
-}
-
 .popover {
   position: absolute;
   top: 100%;
