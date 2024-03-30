@@ -8,7 +8,14 @@ defmodule Cosmopolitan.MeetupTest do
 
     import Cosmopolitan.MeetupFixtures
 
-    @invalid_attrs %{description: nil, end_datetime: nil, location: nil, slug: nil, start_datetime: nil, title: nil}
+    @invalid_attrs %{
+      description: nil,
+      end_datetime: nil,
+      location: nil,
+      slug: nil,
+      start_datetime: nil,
+      title: nil
+    }
 
     test "list_events/0 returns all events" do
       event = event_fixture()
@@ -21,7 +28,14 @@ defmodule Cosmopolitan.MeetupTest do
     end
 
     test "create_event/1 with valid data creates a event" do
-      valid_attrs = %{description: "some description", end_datetime: ~U[2224-02-16 12:05:00Z], location: "some location", slug: "some-slug", start_datetime: ~U[2224-02-16 10:05:00Z], title: "some title"}
+      valid_attrs = %{
+        description: "some description",
+        end_datetime: ~U[2224-02-16 12:05:00Z],
+        location: "some location",
+        slug: "some-slug",
+        start_datetime: ~U[2224-02-16 10:05:00Z],
+        title: "some title"
+      }
 
       assert {:ok, %Event{} = event} = Meetup.create_event(valid_attrs)
       assert event.description == "some description"
@@ -33,7 +47,14 @@ defmodule Cosmopolitan.MeetupTest do
     end
 
     test "create_event/1 cannot use dates in the past" do
-      invalid_attrs = %{description: "some description", end_datetime: ~U[2024-02-16 12:05:00Z], location: "some location", slug: "some-slug", start_datetime: ~U[2024-02-16 12:05:00Z], title: "some title"}
+      invalid_attrs = %{
+        description: "some description",
+        end_datetime: ~U[2024-02-16 12:05:00Z],
+        location: "some location",
+        slug: "some-slug",
+        start_datetime: ~U[2024-02-16 12:05:00Z],
+        title: "some title"
+      }
 
       assert {:error, %Ecto.Changeset{} = changeset} = Meetup.create_event(invalid_attrs)
       assert Keyword.get(changeset.errors, :start_datetime) == {"cannot be in the past", []}
@@ -41,14 +62,29 @@ defmodule Cosmopolitan.MeetupTest do
     end
 
     test "create_event/1 end_datetime cannot be before start_datetime" do
-      invalid_attrs = %{description: "some description", end_datetime: ~U[2224-02-16 08:05:00Z], location: "some location", slug: "some-slug", start_datetime: ~U[2224-02-16 10:05:00Z], title: "some title"}
+      invalid_attrs = %{
+        description: "some description",
+        end_datetime: ~U[2224-02-16 08:05:00Z],
+        location: "some location",
+        slug: "some-slug",
+        start_datetime: ~U[2224-02-16 10:05:00Z],
+        title: "some title"
+      }
 
       assert {:error, %Ecto.Changeset{} = changeset} = Meetup.create_event(invalid_attrs)
-      assert Keyword.get(changeset.errors, :end_datetime) == {"cannot be before start_datetime", []}
+
+      assert Keyword.get(changeset.errors, :end_datetime) ==
+               {"cannot be before start_datetime", []}
     end
 
     test "create_event/1 without a slug generates a slug" do
-      valid_attrs = %{description: "some description", end_datetime: ~U[2224-02-16 12:05:00Z], location: "some location", start_datetime: ~U[2224-02-16 12:05:00Z], title: "some title"}
+      valid_attrs = %{
+        description: "some description",
+        end_datetime: ~U[2224-02-16 12:05:00Z],
+        location: "some location",
+        start_datetime: ~U[2224-02-16 12:05:00Z],
+        title: "some title"
+      }
 
       assert {:ok, %Event{} = event} = Meetup.create_event(valid_attrs)
       assert event.description == "some description"
@@ -65,7 +101,15 @@ defmodule Cosmopolitan.MeetupTest do
 
     test "update_event/2 with valid data updates the event" do
       event = event_fixture()
-      update_attrs = %{description: "some updated description", end_datetime: ~U[2224-02-17 12:05:00Z], location: "some updated location", slug: "some-updated-slug", start_datetime: ~U[2224-02-17 12:05:00Z], title: "some updated title"}
+
+      update_attrs = %{
+        description: "some updated description",
+        end_datetime: ~U[2224-02-17 12:05:00Z],
+        location: "some updated location",
+        slug: "some-updated-slug",
+        start_datetime: ~U[2224-02-17 12:05:00Z],
+        title: "some updated title"
+      }
 
       assert {:ok, %Event{} = event} = Meetup.update_event(event, update_attrs)
       assert event.description == "some updated description"
@@ -114,22 +158,29 @@ defmodule Cosmopolitan.MeetupTest do
   describe "attendees" do
     alias Cosmopolitan.Meetup.Attendee
 
+    import Cosmopolitan.AccountsFixtures
     import Cosmopolitan.MeetupFixtures
 
     @invalid_attrs %{checked_in: nil}
 
     test "list_attendees/0 returns all attendees" do
-      attendee = attendee_fixture()
+      event = event_fixture()
+      user = user_fixture()
+      attendee = attendee_fixture(user.id, event.id)
       assert Meetup.list_attendees() == [attendee]
     end
 
     test "get_attendee!/1 returns the attendee with given id" do
-      attendee = attendee_fixture()
+      event = event_fixture()
+      user = user_fixture()
+      attendee = attendee_fixture(user.id, event.id)
       assert Meetup.get_attendee!(attendee.id) == attendee
     end
 
     test "create_attendee/1 with valid data creates a attendee" do
-      valid_attrs = %{checked_in: true}
+      user = user_fixture()
+      event = event_fixture()
+      valid_attrs = %{checked_in: true, user_id: user.id, event_id: event.id}
 
       assert {:ok, %Attendee{} = attendee} = Meetup.create_attendee(valid_attrs)
       assert attendee.checked_in == true
@@ -140,7 +191,9 @@ defmodule Cosmopolitan.MeetupTest do
     end
 
     test "update_attendee/2 with valid data updates the attendee" do
-      attendee = attendee_fixture()
+      event = event_fixture()
+      user = user_fixture()
+      attendee = attendee_fixture(user.id, event.id)
       update_attrs = %{checked_in: false}
 
       assert {:ok, %Attendee{} = attendee} = Meetup.update_attendee(attendee, update_attrs)
@@ -148,19 +201,25 @@ defmodule Cosmopolitan.MeetupTest do
     end
 
     test "update_attendee/2 with invalid data returns error changeset" do
-      attendee = attendee_fixture()
+      event = event_fixture()
+      user = user_fixture()
+      attendee = attendee_fixture(user.id, event.id)
       assert {:error, %Ecto.Changeset{}} = Meetup.update_attendee(attendee, @invalid_attrs)
       assert attendee == Meetup.get_attendee!(attendee.id)
     end
 
     test "delete_attendee/1 deletes the attendee" do
-      attendee = attendee_fixture()
+      event = event_fixture()
+      user = user_fixture()
+      attendee = attendee_fixture(user.id, event.id)
       assert {:ok, %Attendee{}} = Meetup.delete_attendee(attendee)
       assert_raise Ecto.NoResultsError, fn -> Meetup.get_attendee!(attendee.id) end
     end
 
     test "change_attendee/1 returns a attendee changeset" do
-      attendee = attendee_fixture()
+      event = event_fixture()
+      user = user_fixture()
+      attendee = attendee_fixture(user.id, event.id)
       assert %Ecto.Changeset{} = Meetup.change_attendee(attendee)
     end
   end
