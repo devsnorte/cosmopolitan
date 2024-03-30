@@ -82,6 +82,11 @@ defmodule CosmopolitanWeb.AttendeeControllerTest do
 
       assert json_response(conn, 422)["errors"] != %{}
     end
+
+    @tag :todo
+    test "does not add duplicate users on the same event", _params do
+      raise "Not Implemented"
+    end
   end
 
   describe "update attendee" do
