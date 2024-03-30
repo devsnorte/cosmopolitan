@@ -3,9 +3,9 @@ defmodule Cosmopolitan.Meetup.Attendee do
   import Ecto.Changeset
 
   schema "attendees" do
-    field(:checked_in, :boolean, default: false)
-    field(:event_id, :id)
-    field(:user_id, :id)
+    field :checked_in, :boolean, default: false
+    belongs_to :event, Cosmopolitan.Meetup.Event
+    belongs_to :user, Cosmopolitan.Accounts.User
 
     timestamps(type: :utc_datetime)
   end

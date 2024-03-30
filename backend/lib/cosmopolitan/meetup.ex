@@ -129,6 +129,7 @@ defmodule Cosmopolitan.Meetup do
   def list_attendees_for_event(event_id) do
     Attendee
     |> where(event_id: ^event_id)
+    |> preload([:user])
     |> Repo.all()
   end
 

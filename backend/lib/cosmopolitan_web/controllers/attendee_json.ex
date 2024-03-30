@@ -1,5 +1,6 @@
 defmodule CosmopolitanWeb.AttendeeJSON do
   alias Cosmopolitan.Meetup.Attendee
+  alias Cosmopolitan.Accounts.User
 
   @doc """
   Renders a list of attendees.
@@ -18,7 +19,16 @@ defmodule CosmopolitanWeb.AttendeeJSON do
   defp data(%Attendee{} = attendee) do
     %{
       id: attendee.id,
-      checked_in: attendee.checked_in
+      checked_in: attendee.checked_in,
+      user: user(attendee.user)
     }
   end
+
+  defp user(%User{} = user) do
+    %{
+      name: user.name
+    }
+  end
+
+  defp user(_), do: nil
 end
