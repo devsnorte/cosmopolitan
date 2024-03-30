@@ -4,15 +4,18 @@ defmodule CosmopolitanWeb.AttendeeController do
   alias Cosmopolitan.Meetup
   alias Cosmopolitan.Meetup.Attendee
 
-  action_fallback CosmopolitanWeb.FallbackController
+  action_fallback(CosmopolitanWeb.FallbackController)
 
-  def index(conn, _params) do
-    attendees = Meetup.list_attendees()
+  def index(conn, %{"event_id" => event_id}) do
+    _event = Meetup.get_event!(event_id)
+    attendees = Meetup.list_attendees_for_event(event_id)
     render(conn, :index, attendees: attendees)
   end
 
-  def create(conn, %{"attendee" => attendee_params}) do
-    with {:ok, %Attendee{} = attendee} <- Meetup.create_attendee(attendee_params) do
+  def create(conn, %{"event_id" => event_id, "attendee" => attendee_params}) do
+    params = Map.put(attendee_params, "event_id", event_id)
+
+    with {:ok, %Attendee{} = attendee} <- Meetup.create_attendee(params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", ~p"/api/attendees/#{attendee}")

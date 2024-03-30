@@ -118,6 +118,21 @@ defmodule Cosmopolitan.Meetup do
   end
 
   @doc """
+  Returns the list of attendees for an specific event.
+
+  ## Examples
+
+      iex> list_attendees_for_event(1)
+      [%Attendee{}, ...]
+
+  """
+  def list_attendees_for_event(event_id) do
+    Attendee
+    |> where(event_id: ^event_id)
+    |> Repo.all()
+  end
+
+  @doc """
   Gets a single attendee.
 
   Raises `Ecto.NoResultsError` if the Attendee does not exist.
