@@ -27,4 +27,18 @@ defmodule Cosmopolitan.MeetupFixtures do
 
     event
   end
+
+  @doc """
+  Generate a attendee.
+  """
+  def attendee_fixture(attrs \\ %{}) do
+    {:ok, attendee} =
+      attrs
+      |> Enum.into(%{
+        checked_in: true
+      })
+      |> Cosmopolitan.Meetup.create_attendee()
+
+    attendee
+  end
 end

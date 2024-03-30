@@ -10,6 +10,7 @@ defmodule CosmopolitanWeb.Router do
 
     resources "/events", EventController, except: [:new, :edit]
     resources "/users", UserController, except: [:new, :edit]
+    resources "/attendees", AttendeeController, except: [:new, :edit]
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

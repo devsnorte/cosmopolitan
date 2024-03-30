@@ -110,4 +110,58 @@ defmodule Cosmopolitan.MeetupTest do
       assert %Ecto.Changeset{} = Meetup.change_event(event)
     end
   end
+
+  describe "attendees" do
+    alias Cosmopolitan.Meetup.Attendee
+
+    import Cosmopolitan.MeetupFixtures
+
+    @invalid_attrs %{checked_in: nil}
+
+    test "list_attendees/0 returns all attendees" do
+      attendee = attendee_fixture()
+      assert Meetup.list_attendees() == [attendee]
+    end
+
+    test "get_attendee!/1 returns the attendee with given id" do
+      attendee = attendee_fixture()
+      assert Meetup.get_attendee!(attendee.id) == attendee
+    end
+
+    test "create_attendee/1 with valid data creates a attendee" do
+      valid_attrs = %{checked_in: true}
+
+      assert {:ok, %Attendee{} = attendee} = Meetup.create_attendee(valid_attrs)
+      assert attendee.checked_in == true
+    end
+
+    test "create_attendee/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Meetup.create_attendee(@invalid_attrs)
+    end
+
+    test "update_attendee/2 with valid data updates the attendee" do
+      attendee = attendee_fixture()
+      update_attrs = %{checked_in: false}
+
+      assert {:ok, %Attendee{} = attendee} = Meetup.update_attendee(attendee, update_attrs)
+      assert attendee.checked_in == false
+    end
+
+    test "update_attendee/2 with invalid data returns error changeset" do
+      attendee = attendee_fixture()
+      assert {:error, %Ecto.Changeset{}} = Meetup.update_attendee(attendee, @invalid_attrs)
+      assert attendee == Meetup.get_attendee!(attendee.id)
+    end
+
+    test "delete_attendee/1 deletes the attendee" do
+      attendee = attendee_fixture()
+      assert {:ok, %Attendee{}} = Meetup.delete_attendee(attendee)
+      assert_raise Ecto.NoResultsError, fn -> Meetup.get_attendee!(attendee.id) end
+    end
+
+    test "change_attendee/1 returns a attendee changeset" do
+      attendee = attendee_fixture()
+      assert %Ecto.Changeset{} = Meetup.change_attendee(attendee)
+    end
+  end
 end
